@@ -1,0 +1,17 @@
+section {
+  display: grid;
+  place-items: center;
+}
+
+header {
+  width: 300px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+body {
+  text-align: center;
+}
