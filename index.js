@@ -1,9 +1,9 @@
-const https = require("https");
+const http = require("http");
 const fs = require("fs");
 
-const PORT = process.env.port || 8080;
+const PORT = process.env.PORT || 8080;
 
-https
+http
   .createServer((request, response) => {
     const url = new URL(request.url, `https://${request.headers.host}`);
     let path = url.pathname;
