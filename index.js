@@ -1,11 +1,11 @@
-const http = require("http");
+const https = require("https");
 const fs = require("fs");
 
 const PORT = process.env.port || 8080;
 
-http
+https
   .createServer((request, response) => {
-    const url = new URL(request.url, `http://${request.headers.host}`);
+    const url = new URL(request.url, `https://${request.headers.host}`);
     let path = url.pathname;
 
     if (path.indexOf(".css") !== -1) {
