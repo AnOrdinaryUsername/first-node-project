@@ -10,18 +10,34 @@ http
 
     if (path.indexOf(".css") !== -1) {
       grabRequestedFile("pages/styles.css", "text/css", response);
-    } else if (path === "/") {
-      const initialPath = "pages/index.html";
-      grabRequestedFile(initialPath, "text/html", response);
     } else {
-      const pagePath = `pages${path}`;
-      grabRequestedFile(pagePath, "text/html", response);
+      grabRequestedFile(path, "text/html", response);
     }
   })
   .listen(PORT);
 
 function grabRequestedFile(pathName, mimeType, response) {
-  fs.readFile(pathName, (error, data) => {
+  let pagePath = null;
+  if (mimeType === "text/html") {
+    switch (pathName) {
+      case "/":
+        pagePath = "pages/index.html";
+        break;
+      case "/about":
+        pagePath = "pages/about.html";
+        break;
+      case "/contact-me":
+        pagePath = "pages/contact-me.html";
+        break;
+      default:
+        pagePath = "pages/404.html";
+        break;
+    }
+  } else {
+    pagePath = pathName;
+  }
+
+  fs.readFile(pagePath, (error, data) => {
     switch (mimeType) {
       case "text/html":
         if (error) {
